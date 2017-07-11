@@ -1,0 +1,30 @@
+.enabled .markdown-body {
+  display: block;
+}
+
+.enabled .markdown-source {
+  display: none;
+}
+
+.disabled .markdown-body {
+  display: none;
+}
+
+.disabled .markdown-source {
+  display: block;
+}
+
+.markdown-body {
+  min-width: 200px;
+  margin: 30px auto;
+  font-family: Arial, Sans-serif;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.markdown-source {
+  background: none;
+  margin: 0px;
+  padding: 0px;
+}
