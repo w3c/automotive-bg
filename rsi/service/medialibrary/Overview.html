@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html typeof="bibo:Document " prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="dc:language" content="en" lang="">
+  <style>
+    /*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+    
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+    }
+    
+    .hljs-comment,
+    .hljs-quote {
+      color: #998;
+      font-style: italic;
+    }
+    
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .hljs-number,
+    .hljs-literal,
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-tag .hljs-attr {
+      color: #008080;
+    }
+    
+    .hljs-string,
+    .hljs-doctag {
+      color: #d14;
+    }
+    
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+      color: #900;
+      font-weight: bold;
+    }
+    
+    .hljs-subst {
+      font-weight: normal;
+    }
+    
+    .hljs-type,
+    .hljs-class .hljs-title {
+      color: #458;
+      font-weight: bold;
+    }
+    
+    .hljs-tag,
+    .hljs-name,
+    .hljs-attribute {
+      color: #000080;
+      font-weight: normal;
+    }
+    
+    .hljs-regexp,
+    .hljs-link {
+      color: #009926;
+    }
+    
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #990073;
+    }
+    
+    .hljs-built_in,
+    .hljs-builtin-name {
+      color: #0086b3;
+    }
+    
+    .hljs-meta {
+      color: #999;
+      font-weight: bold;
+    }
+    
+    .hljs-deletion {
+      background: #fdd;
+    }
+    
+    .hljs-addition {
+      background: #dfd;
+    }
+    
+    .hljs-emphasis {
+      font-style: italic;
+    }
+    
+    .hljs-strong {
+      font-weight: bold;
+    }
+  </style>
+  <style id="respec-mainstyle">
+    /*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+    /* Override code highlighter background */
+    
+    .hljs {
+      background: transparent !important;
+    }
+    /* --- INLINES --- */
+    
+    em.rfc2119 {
+      text-transform: lowercase;
+      font-variant: small-caps;
+      font-style: normal;
+      color: #900;
+    }
+    
+    h1 acronym,
+    h2 acronym,
+    h3 acronym,
+    h4 acronym,
+    h5 acronym,
+    h6 acronym,
+    a acronym,
+    h1 abbr,
+    h2 abbr,
+    h3 abbr,
+    h4 abbr,
+    h5 abbr,
+    h6 abbr,
+    a abbr {
+      border: none;
+    }
+    
+    dfn {
+      font-weight: bold;
+    }
+    
+    a.internalDFN {
+      color: inherit;
+      border-bottom: 1px solid #99c;
+      text-decoration: none;
+    }
+    
+    a.externalDFN {
+      color: inherit;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+    
+    a.bibref {
+      text-decoration: none;
+    }
+    
+    cite .bibref {
+      font-style: normal;
+    }
+    
+    code {
+      color: #C83500;
+    }
+    
+    th code {
+      color: inherit;
+    }
+    /* --- TOC --- */
+    
+    .toc a,
+    .tof a {
+      text-decoration: none;
+    }
+    
+    a .secno,
+    a .figno {
+      color: #000;
+    }
+    
+    ul.tof,
+    ol.tof {
+      list-style: none outside none;
+    }
+    
+    .caption {
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+    /* --- TABLE --- */
+    
+    table.simple {
+      border-spacing: 0;
+      border-collapse: collapse;
+      border-bottom: 3px solid #005a9c;
+    }
+    
+    .simple th {
+      background: #005a9c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+    }
+    
+    .simple th[scope="row"] {
+      background: inherit;
+      color: inherit;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple tr:nth-child(even) {
+      background: #f0f6ff;
+    }
+    /* --- DL --- */
+    
+    .section dd>p:first-child {
+      margin-top: 0;
+    }
+    
+    .section dd>p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section dd {
+      margin-bottom: 1em;
+    }
+    
+    .section dl.attrs dd,
+    .section dl.eldef dd {
+      margin-bottom: 0;
+    }
+    
+    .respec-hidden {
+      display: none;
+    }
+    
+    #respec-ui {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 202px;
+      text-align: right;
+    }
+    
+    #respec-pill,
+    .respec-info-button {
+      background: #fff;
+      height: 2.5em;
+      color: rgb(120, 120, 120);
+      border: 1px solid #ccc;
+      box-shadow: 1px 1px 8px 0 rgba(100, 100, 100, .5);
+    }
+    
+    .respec-info-button {
+      border: none;
+      border-radius: 2em;
+      margin-right: 1em;
+      min-width: 3.5em;
+    }
+    
+    #respec-pill:disabled {
+      margin: 10px auto;
+      font-size: 2.8px;
+      position: relative;
+      text-indent: -9999em;
+      border-top: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-right: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-bottom: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-left: 1.1em solid #ffffff;
+      transform: translateZ(0);
+      animation: respec-spin 1.1s infinite linear;
+      box-shadow: none;
+    }
+    
+    #respec-pill:disabled,
+    #respec-pill:disabled:after {
+      border-radius: 50%;
+      width: 10em;
+      height: 10em;
+    }
+    
+    @keyframes respec-spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    #respec-pill:hover,
+    #respec-pill:focus {
+      color: rgb(0, 0, 0);
+      transition: color .2s
+    }
+    
+    #respec-menu {
+      font-family: sans-serif;
+      background: #fff;
+      box-shadow: 1px 1px 8px 0 rgba(100, 100, 100, .5);
+      width: 200px;
+      display: none;
+      text-align: left;
+      margin-top: 5px;
+      font-size: .8em;
+    }
+    
+    .respec-save-button {
+      background: #fff;
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 5px;
+      display: block;
+      width: 100%;
+      color: #000;
+      text-decoration: none;
+      text-align: center;
+      font-size: inherit;
+    }
+    
+    #respec-ui button:focus,
+    #respec-pill:focus,
+    .respec-option:focus {
+      outline: 0;
+      outline-style: none;
+    }
+    
+    #respec-ui button.respec-pill-error {
+      background-color: red;
+      color: white;
+    }
+    
+    #respec-ui button.respec-pill-warning {
+      background-color: orange;
+      color: white;
+    }
+    
+    #respec-menu button.respec-option {
+      background: white;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: inherit;
+      padding: 1.2em 1.2em;
+    }
+    
+    #respec-menu button.respec-option:hover {
+      background-color: #eeeeee;
+    }
+    
+    .respec-cmd-icon {
+      padding-right: .5em;
+    }
+    
+    #respec-ui button.respec-option:last-child {
+      border: none;
+      border-radius: inherit;
+    }
+    
+    @media print {
+      .removeOnSave {
+        display: none;
+      }
+    }
+  </style>
+
+  <title>Volkswagen Infotainment Web Interface service definition: viwi.service.medialibrary</title>
+
+  <link rel="stylesheet" href="../../css/default.css">
+  <link rel="stylesheet" href="../../css/github.css">
+  <link rel="stylesheet" href="../../css/markdown.css">
+  <link rel="stylesheet" href="../../css/page.css">
+
+
+  <meta name="generator" content="ReSpec Developer Edition">
+  <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-Member-SUBM">
+</head>
+<body class="h-entry">
+  <div class="head">
+    <p>
+      <a class="logo" href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" width="72" height="48"></a>
+      <a href="https://www.w3.org/Submission/"> <img alt="W3C Member Submission" src="https://www.w3.org/Icons/member_subm" width="211" height="48"></a>
+    </p>
+    <h1 class="title p-name" id="title" property="dcterms:title">Volkswagen Infotainment Web Interface service definition: viwi.service.medialibrary</h1>
+    <h2><abbr title="World Wide Web Consortium">W3C</abbr> Member Submission <time property="dcterms:issued" class="dt-published" datetime="2016-12-13">13 December 2016</time></h2>
+    <dl>
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="https://www.w3.org/Submission/2016/SUBM-viwi-service-medialibrary-20161213/">https://www.w3.org/Submission/2016/SUBM-viwi-service-medialibrary-20161213/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="https://www.w3.org/Submission/viwi-service-medialibrary/">https://www.w3.org/Submission/viwi-service-medialibrary/</a></dd>
+      <dt>Editor:</dt>
+      <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0" data-editor-id="95295"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Dr. Patrick Bartsch</span>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.volkswagenag.com">Volkswagen AG</a></span>
+        <span property="rdf:rest" resource="rdf:nil"></span>
+      </dd>
+
+    </dl>
+    <p class="copyright">Copyright © 2016 <span class="notetoeditor"></span>.                                           
+                This document is available under the <a href="http://www.w3.org/Consortium/Legal/copyright-documents">W3C
+                    Document License</a>. See the <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">W3C
+                    Intellectual Rights Notice and Legal Disclaimers</a> for additional
+                information.</p>
+    <hr title="Separator for header">
+  </div>
+<!-- 
+  <section id="abstract" class="introductory" property="dc:abstract">
+    <h2>Abstract</h2>
+    <p>
+      This is required.
+    </p>
+  </section>
+-->
+  <section id="sotd" class="introductory">
+    <h2>Status of This Document</h2>
+    <p>
+      <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em>
+    </p>
+
+    <p>
+      This is required.
+    </p>
+
+    <p>By publishing this document, <abbr title="World Wide Web Consortium">W3C</abbr> acknowledges that the <a href="https://www.w3.org/Submission/2016/SUBM-viwi-service-medialibrary-20161213/">Submitting Members</a> have made a formal Submission request to <abbr title="World Wide Web Consortium">W3C</abbr> for discussion. Publication of this document by <abbr title="World Wide Web Consortium">W3C</abbr> indicates no endorsement of its content by <abbr title="World Wide Web Consortium">W3C</abbr>, nor that <abbr title="World Wide Web Consortium">W3C</abbr> has, is, or will be allocating any resources to the issues addressed by it. This document is not the product of a chartered <abbr title="World Wide Web Consortium">W3C</abbr> group, but is published as potential input to the <a href="https://www.w3.org/Consortium/Process"><abbr title="World Wide Web Consortium">W3C</abbr> Process</a>. A <a href="https://www.w3.org/Submission/2016/01/Comment/"><abbr title="World Wide Web Consortium">W3C</abbr> Team Comment</a> has been published in conjunction with this Member Submission. Publication of acknowledged Member Submissions at the <abbr title="World Wide Web Consortium">W3C</abbr> site is one of the benefits of <a href="https://www.w3.org/Consortium/Prospectus/Joining"><abbr title="World Wide Web Consortium">W3C</abbr> Membership</a>. Please consult the requirements associated with Member Submissions of <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-submissions">section 3.3 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. Please consult the complete <a href="https://www.w3.org/Submission">list of acknowledged <abbr title="World Wide Web Consortium">W3C</abbr> Member Submissions</a>.</p>
+  </section>
+
+  <section>
+    <h1 style="text-align: center;">Volkswagen Infotainment Web Interface</h1>
+    <p></p>
+    <h3 style="text-align: center;">service definition: <i>viwi.service.medialibrary</i></h3>
+    <p></p>
+    <article class="markdown-body">
+      <p>&nbsp;</p>
+      <p style="text-align: center;">
+        <img src="../../img/curlies.png" alt="viwi">
+      </p>
+      <p style="text-align: center;">by Dr. Patrick Bartsch 2013-2016 </p>
+      <p>&nbsp;</p>
+      <p style="text-align: center;">version: v1.6.1-<abbr title="World Wide Web Consortium">W3C</abbr></p>
+      <p>&nbsp;</p>
+
+      <p>This repo holds all media library (tracks, albums, etc.) related resources</p>
+      <h2 id="table-of-contents">Table of contents</h2>
+      <ul>
+        <li><a href="#General">General information</a>
+          <ul>
+            <li><a href="#Author">Author</a></li>
+            <li><a href="#Contributors">Contributors</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#Resources">Resources</a>
+          <ul>
+            <li><a href="#medialibrary.sources">/medialibrary/sources/</a></li>
+            <li><a href="#medialibrary.tracks">/medialibrary/tracks/</a></li>
+            <li><a href="#medialibrary.albums">/medialibrary/albums/</a></li>
+            <li><a href="#medialibrary.artists">/medialibrary/artists/</a></li>
+            <li><a href="#medialibrary.genres">/medialibrary/genres/</a></li>
+            <li><a href="#medialibrary.playlists">/medialibrary/playlists/</a></li>
+            <li><a href="#medialibrary.folders">/medialibrary/folders/</a></li>
+          </ul>
+        </li>
+      </ul>
+      <h2 id="-a-name-general-a-general-information">
+        <a id="General"></a>General information</h2>
+      <p>version: 1.6.1-<abbr title="World Wide Web Consortium">W3C</abbr></p>
+      <p>Repository: </p>
+      <h3 id="-a-name-author-a-author">
+        <a id="Author"></a>Author</h3>
+      <p>Dr. Patrick Bartsch &lt;patrick.bartsch@volkswagen.de&gt;</p>
+
+      <h2 id="-a-name-resources-a-resources">
+        <a id="Resources"></a>Resources</h2>
+      <h3 id="-a-name-medialibrary-sources-a-medialibrary-sources-">
+        <a id="medialibrary.sources"></a>/medialibrary/sources/</h3>
+      <p>This endpoint provides access to the media sources available in the media library.</p>
+      <h4 id="-a-name-medialibrarysourceobject-a-medialibrarysourceobject">
+        <a id="mediaLibrarySourceObject"></a>mediaLibrarySourceObject</h4>
+      <h5 id="properties">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>source name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>rootfolder</td>
+            <td>the sources root folder, only set if medium is plugged in, undefined otherwise</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#folderObject">/medialibrary/folders/folderObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-medialibrary-sources-">Resource level access (/medialibrary/sources/)</h4>
+      <h5 id="get-resource-level-access-medialibrary-sources">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /medialibrary/sources/ to retrieve a list of available elements of type <a href="#mediaLibrarySourceObject">mediaLibrarySourceObject</a></p>
+      <p>Subscribe to /medialibrary/sources/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-1">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/sources/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/sources/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/sources/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-medialibrary-sources-uuid-">Element level access (/medialibrary/sources/:<em>uuid</em>)</h3>
+      <h4 id="get-element-level-access-medialibrary-sources-uuid">GET</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /medialibrary/sources/:<em>uuid</em> to retrieve a particular <a href="#mediaLibrarySourceObject">mediaLibrarySourceObject</a></p>
+      <p>Subscribe to /medialibrary/sources/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-response-example-2">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/sources/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/sources/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="events-element-level-access-medialibrary-sources-uuid">Events</h2>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/medialibrary/sources/ (resource level)</li>
+      </ul>
+      <h2 id="-a-name-medialibrary-tracks-a-medialibrary-tracks-">
+        <a id="medialibrary.tracks"></a>/medialibrary/tracks/</h2>
+      <p>Provides a list of all tracks available in the system, might contain connected devices content as well.</p>
+      <h3 id="-a-name-trackobject-a-trackobject">
+        <a id="trackObject"></a>trackObject</h3>
+      <h4 id="properties-element-level-access-medialibrary-sources-uuid">Properties</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>Track title</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>image</td>
+            <td>cover art</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>genres</td>
+            <td>track genre</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#genreObject">/medialibrary/genres/genreObject</a></td>
+          </tr>
+          <tr>
+            <td>folders</td>
+            <td>actual folder the item resides in</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#folderObject">/medialibrary/folders/folderObject</a></td>
+          </tr>
+          <tr>
+            <td>rating</td>
+            <td>owner rating</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>albums</td>
+            <td>albums containing this track</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#albumObject">/medialibrary/albums/albumObject</a></td>
+          </tr>
+          <tr>
+            <td>artists</td>
+            <td>track artists</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#artistObject">/medialibrary/artists/artistObject</a></td>
+          </tr>
+          <tr>
+            <td>date</td>
+            <td>release date</td>
+            <td>string</td>
+            <td>date-time</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>disc</td>
+            <td>disc of album</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>duration</td>
+            <td>track duration</td>
+            <td>integer</td>
+            <td></td>
+            <td>s</td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>source</td>
+            <td>Source of the file</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#mediaLibrarySourceObject">/medialibrary/sources/mediaLibrarySourceObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="resource-level-access-medialibrary-tracks-">Resource level access (/medialibrary/tracks/)</h3>
+      <h4 id="get-resource-level-access-medialibrary-tracks">GET</h4>
+      <p><strong>Note</strong>: Use a http GET request on /medialibrary/tracks/ to retrieve a list of available elements of type <a href="#trackObject">trackObject</a></p>
+      <p>Subscribe to /medialibrary/tracks/ to receive updates for element creations or removals from the collection.</p>
+      <h5 id="request-response-example-3">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/tracks/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/tracks/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/tracks/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="element-level-access-medialibrary-tracks-uuid-">Element level access (/medialibrary/tracks/:<em>uuid</em>)</h2>
+      <h4 id="get-element-level-access-medialibrary-tracks-uuid">GET</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /medialibrary/tracks/:<em>uuid</em> to retrieve a particular <a href="#trackObject">trackObject</a></p>
+      <p>Subscribe to /medialibrary/tracks/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-response-example-4">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/tracks/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/tracks/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="events-element-level-access-medialibrary-tracks-uuid">Events</h2>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/medialibrary/tracks/ (resource level)</li>
+      </ul>
+      <h2 id="-a-name-medialibrary-albums-a-medialibrary-albums-">
+        <a id="medialibrary.albums"></a>/medialibrary/albums/</h2>
+      <p>Provides a list of all albums available in the system, might contain connected devices content as well.</p>
+      <h3 id="-a-name-albumobject-a-albumobject">
+        <a id="albumObject"></a>albumObject</h3>
+      <h4 id="properties-element-level-access-medialibrary-tracks-uuid">Properties</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>Identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>album title</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>genres</td>
+            <td>album genre</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#genreObject">/medialibrary/genres/genreObject</a></td>
+          </tr>
+          <tr>
+            <td>image</td>
+            <td>album art</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>rating</td>
+            <td>album rating</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..5]</td>
+          </tr>
+          <tr>
+            <td>artists</td>
+            <td>album artist</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#artistObject">/medialibrary/artists/artistObject</a></td>
+          </tr>
+          <tr>
+            <td>date</td>
+            <td>release date</td>
+            <td>string</td>
+            <td>date-time</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>duration</td>
+            <td>total album duration</td>
+            <td>integer</td>
+            <td></td>
+            <td>sec</td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>tracks</td>
+            <td>album tracks</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#trackObject">/medialibrary/tracks/trackObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="resource-level-access-medialibrary-albums-">Resource level access (/medialibrary/albums/)</h3>
+      <h4 id="get-resource-level-access-medialibrary-albums">GET</h4>
+      <p><strong>Note</strong>: Use a http GET request on /medialibrary/albums/ to retrieve a list of available elements of type <a href="#albumObject">albumObject</a></p>
+      <p>Subscribe to /medialibrary/albums/ to receive updates for element creations or removals from the collection.</p>
+      <h5 id="request-response-example-5">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/albums/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/albums/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/albums/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="element-level-access-medialibrary-albums-uuid-">Element level access (/medialibrary/albums/:<em>uuid</em>)</h2>
+      <h4 id="get-element-level-access-medialibrary-albums-uuid">GET</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /medialibrary/albums/:<em>uuid</em> to retrieve a particular <a href="#albumObject">albumObject</a></p>
+      <p>Subscribe to /medialibrary/albums/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-response-example-6">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/albums/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/albums/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="events-element-level-access-medialibrary-albums-uuid">Events</h2>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/medialibrary/albums/ (resource level)</li>
+      </ul>
+      <h2 id="-a-name-medialibrary-artists-a-medialibrary-artists-">
+        <a id="medialibrary.artists"></a>/medialibrary/artists/</h2>
+      <p>Provides a list of all known artists, might contain connected devices content as well.</p>
+      <h3 id="-a-name-artistobject-a-artistobject">
+        <a id="artistObject"></a>artistObject</h3>
+      <h4 id="properties-events-element-level-access-medialibrary-albums-uuid">Properties</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>artist name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>genres</td>
+            <td>artist genre</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#genreObject">/medialibrary/genres/genreObject</a></td>
+          </tr>
+          <tr>
+            <td>image</td>
+            <td>artist art</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>rating</td>
+            <td>owner rating</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>albums</td>
+            <td>artist albums</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#albumObject">/medialibrary/albums/albumObject</a></td>
+          </tr>
+          <tr>
+            <td>tracks</td>
+            <td>artists tracks</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#trackObject">/medialibrary/tracks/trackObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="resource-level-access-medialibrary-artists-">Resource level access (/medialibrary/artists/)</h3>
+      <h4 id="get-resource-level-access-medialibrary-artists">GET</h4>
+      <p><strong>Note</strong>: Use a http GET request on /medialibrary/artists/ to retrieve a list of available elements of type <a href="#artistObject">artistObject</a></p>
+      <p>Subscribe to /medialibrary/artists/ to receive updates for element creations or removals from the collection.</p>
+      <h5 id="request-response-example-7">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/artists/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/artists/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/artists/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="element-level-access-medialibrary-artists-uuid-">Element level access (/medialibrary/artists/:<em>uuid</em>)</h2>
+      <h4 id="get-element-level-access-medialibrary-artists-uuid">GET</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /medialibrary/artists/:<em>uuid</em> to retrieve a particular <a href="#artistObject">artistObject</a></p>
+      <p>Subscribe to /medialibrary/artists/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-response-example-8">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/artists/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/artists/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="events-element-level-access-medialibrary-artists-uuid">Events</h2>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/medialibrary/artists/ (resource level)</li>
+      </ul>
+      <h2 id="-a-name-medialibrary-genres-a-medialibrary-genres-">
+        <a id="medialibrary.genres"></a>/medialibrary/genres/</h2>
+      <p>Provides an aggregated view over all known genres an the media related to it.</p>
+      <h3 id="-a-name-genreobject-a-genreobject">
+        <a id="genreObject"></a>genreObject</h3>
+      <h4 id="properties-element-level-access-medialibrary-artists-uuid">Properties</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>genre name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>rating</td>
+            <td>owner rating</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>tracks</td>
+            <td>artists tracks</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#trackObject">/medialibrary/tracks/trackObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="resource-level-access-medialibrary-genres-">Resource level access (/medialibrary/genres/)</h3>
+      <h4 id="get-resource-level-access-medialibrary-genres">GET</h4>
+      <p><strong>Note</strong>: Use a http GET request on /medialibrary/genres/ to retrieve a list of available elements of type <a href="#genreObject">genreObject</a></p>
+      <p>Subscribe to /medialibrary/genres/ to receive updates for element creations or removals from the collection.</p>
+      <h5 id="request-response-example-9">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/genres/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/genres/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/genres/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="element-level-access-medialibrary-genres-uuid-">Element level access (/medialibrary/genres/:<em>uuid</em>)</h2>
+      <h4 id="get-element-level-access-medialibrary-genres-uuid">GET</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /medialibrary/genres/:<em>uuid</em> to retrieve a particular <a href="#genreObject">genreObject</a></p>
+      <p>Subscribe to /medialibrary/genres/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-response-example-10">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/genres/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/genres/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="events-element-level-access-medialibrary-genres-uuid">Events</h2>
+      <p>This endpoint will not send any events. Therefor you can not register for them.</p>
+      <h2 id="-a-name-medialibrary-playlists-a-medialibrary-playlists-">
+        <a id="medialibrary.playlists"></a>/medialibrary/playlists/</h2>
+      <p>Provides a list of all playlists available in the system, might contain connected devices content as well.</p>
+      <h3 id="-a-name-playlistobject-a-playlistobject">
+        <a id="playlistObject"></a>playlistObject</h3>
+      <h4 id="properties-element-level-access-medialibrary-genres-uuid">Properties</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>playlist name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>genres</td>
+            <td>playlist genre</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#genreObject">/medialibrary/genres/genreObject</a></td>
+          </tr>
+          <tr>
+            <td>folders</td>
+            <td>actual folder the item resides in</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#folderObject">/medialibrary/folders/folderObject</a></td>
+          </tr>
+          <tr>
+            <td>image</td>
+            <td>playlist art</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>rating</td>
+            <td>owner rating</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>artists</td>
+            <td>playlist artists</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#artistObject">/medialibrary/artists/artistObject</a></td>
+          </tr>
+          <tr>
+            <td>date</td>
+            <td>last modification</td>
+            <td>string</td>
+            <td>date-time</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>duration</td>
+            <td>total duration</td>
+            <td>integer</td>
+            <td></td>
+            <td>s</td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>tracks</td>
+            <td>playlist tracks</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#trackObject">/medialibrary/tracks/trackObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="resource-level-access-medialibrary-playlists-">Resource level access (/medialibrary/playlists/)</h3>
+      <h4 id="post-resource-level-access-medialibrary-playlists">POST</h4>
+      <p><strong>Note</strong>: Use a http POST request on /medialibrary/playlists/ to create a new element of type <a href="#playlistObject">playlistObject</a></p>
+      <p>Subscribe to /medialibrary/playlists/ to receive updates for element creations or removals from the collection.</p>
+      <h5 id="request-parameters-resource-level-access-medialibrary-playlists">Request parameters</h5>
+      <p>The following parameters can be used with the request and subscriptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>format</th>
+            <th>mandatory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td>string</td>
+            <td></td>
+            <td>yes</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 id="request-response-example-11">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">POST <span class="hljs-string">/medialibrary/playlists/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">viwi</span>": <span class="hljs-value"><span class="hljs-string">"rockz.."</span>
+</span>}</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+<span class="hljs-attribute">Location</span>: <span class="hljs-string">/medialibrary/playlists/3901a278-ba17-44d6-9aef-f7ca67c04840</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h4 id="get-resource-level-access-medialibrary-playlists">GET</h4>
+      <p><strong>Note</strong>: Use a http GET request on /medialibrary/playlists/ to retrieve a list of available elements of type <a href="#playlistObject">playlistObject</a></p>
+      <p>Subscribe to /medialibrary/playlists/ to receive updates for element creations or removals from the collection.</p>
+      <h5 id="request-response-example-12">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/playlists/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/playlists/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/playlists/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="element-level-access-medialibrary-playlists-uuid-">Element level access (/medialibrary/playlists/:<em>uuid</em>)</h2>
+      <h4 id="post-element-level-access-medialibrary-playlists-uuid">POST</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http POST request on /medialibrary/playlists/:<em>uuid</em> to update a particular <a href="#playlistObject">playlistObject</a></p>
+      <p>Subscribe to /medialibrary/playlists/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-parameters-element-level-access-medialibrary-playlists-uuid">Request parameters</h5>
+      <p>The following parameters can be used with the request and subscriptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>mandatory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>tracks</td>
+            <td>array</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>rating</td>
+            <td>integer</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>image</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 id="request-response-example-13">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">POST <span class="hljs-string">/medialibrary/playlists/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">viwi</span>": <span class="hljs-value"><span class="hljs-string">"rockz.."</span>
+</span>}</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h4 id="get-element-level-access-medialibrary-playlists-uuid">GET</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /medialibrary/playlists/:<em>uuid</em> to retrieve a particular <a href="#playlistObject">playlistObject</a></p>
+      <p>Subscribe to /medialibrary/playlists/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-response-example-14">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/playlists/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/playlists/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h4 id="delete-element-level-access-medialibrary-playlists-uuid">DELETE</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http DELETE request on /medialibrary/playlists/:<em>uuid</em> to update a particular <a href="#playlistObject">playlistObject</a></p>
+      <p>Subscribe to /medialibrary/playlists/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-response-example-15">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">DELETE <span class="hljs-string">/medialibrary/playlists/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h2 id="events-element-level-access-medialibrary-playlists-uuid">Events</h2>
+      <p>This endpoint will not send any events. Therefor you can not register for them.</p>
+      <h2 id="-a-name-medialibrary-folders-a-medialibrary-folders-">
+        <a id="medialibrary.folders"></a>/medialibrary/folders/</h2>
+      <p>Provides access to the media in folder layout, might contain contet of connected devices as well.</p>
+      <h3 id="-a-name-folderobject-a-folderobject">
+        <a id="folderObject"></a>folderObject</h3>
+      <h4 id="properties-element-level-access-medialibrary-playlists-uuid">Properties</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>Folder name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>tracks</td>
+            <td>track files in folder</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#trackObject">/medialibrary/tracks/trackObject</a></td>
+          </tr>
+          <tr>
+            <td>playlists</td>
+            <td>playlist files in folder</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#playlistObject">/medialibrary/playlists/playlistObject</a></td>
+          </tr>
+          <tr>
+            <td>videos</td>
+            <td>video files in folder</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#videoObject">/medialibrary/videos/videoObject</a></td>
+          </tr>
+          <tr>
+            <td>pictures</td>
+            <td>pictures files in folder</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#pictureObject">/medialibrary/pictures/pictureObject</a></td>
+          </tr>
+          <tr>
+            <td>folders</td>
+            <td>folders in folder</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#folderObject">/medialibrary/folders/folderObject</a></td>
+          </tr>
+          <tr>
+            <td>abspath</td>
+            <td>absolute path to folder</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>parent</td>
+            <td>parent folder</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#folderObject">/medialibrary/folders/folderObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="resource-level-access-medialibrary-folders-">Resource level access (/medialibrary/folders/)</h3>
+      <h4 id="get-resource-level-access-medialibrary-folders">GET</h4>
+      <p><strong>Note</strong>: Use a http GET request on /medialibrary/folders/ to retrieve a list of available elements of type <a href="#folderObject">folderObject</a></p>
+      <p>Subscribe to /medialibrary/folders/ to receive updates for element creations or removals from the collection.</p>
+      <h5 id="request-response-example-16">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/folders/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/folders/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/folders/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="element-level-access-medialibrary-folders-uuid-">Element level access (/medialibrary/folders/:<em>uuid</em>)</h2>
+      <h4 id="get-element-level-access-medialibrary-folders-uuid">GET</h4>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /medialibrary/folders/:<em>uuid</em> to retrieve a particular <a href="#folderObject">folderObject</a></p>
+      <p>Subscribe to /medialibrary/folders/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h5 id="request-response-example-17">Request/response example</h5>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/medialibrary/folders/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/medialibrary/folders/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h2 id="events-element-level-access-medialibrary-folders-uuid">Events</h2>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/medialibrary/folders/:<em>uuid</em> (element level)</li>
+        <li>/medialibrary/folders/ (resource level)</li>
+      </ul>
+    </article>
+  </section>
+</body>
+</html>

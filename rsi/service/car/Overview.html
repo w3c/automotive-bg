@@ -1,0 +1,3700 @@
+<!DOCTYPE html>
+<html typeof="bibo:Document " prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="dc:language" content="en" lang="">
+  <style>
+    /*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+    
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+    }
+    
+    .hljs-comment,
+    .hljs-quote {
+      color: #998;
+      font-style: italic;
+    }
+    
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .hljs-number,
+    .hljs-literal,
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-tag .hljs-attr {
+      color: #008080;
+    }
+    
+    .hljs-string,
+    .hljs-doctag {
+      color: #d14;
+    }
+    
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+      color: #900;
+      font-weight: bold;
+    }
+    
+    .hljs-subst {
+      font-weight: normal;
+    }
+    
+    .hljs-type,
+    .hljs-class .hljs-title {
+      color: #458;
+      font-weight: bold;
+    }
+    
+    .hljs-tag,
+    .hljs-name,
+    .hljs-attribute {
+      color: #000080;
+      font-weight: normal;
+    }
+    
+    .hljs-regexp,
+    .hljs-link {
+      color: #009926;
+    }
+    
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #990073;
+    }
+    
+    .hljs-built_in,
+    .hljs-builtin-name {
+      color: #0086b3;
+    }
+    
+    .hljs-meta {
+      color: #999;
+      font-weight: bold;
+    }
+    
+    .hljs-deletion {
+      background: #fdd;
+    }
+    
+    .hljs-addition {
+      background: #dfd;
+    }
+    
+    .hljs-emphasis {
+      font-style: italic;
+    }
+    
+    .hljs-strong {
+      font-weight: bold;
+    }
+  </style>
+  <style id="respec-mainstyle">
+    /*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+    /* Override code highlighter background */
+    
+    .hljs {
+      background: transparent !important;
+    }
+    /* --- INLINES --- */
+    
+    em.rfc2119 {
+      text-transform: lowercase;
+      font-variant: small-caps;
+      font-style: normal;
+      color: #900;
+    }
+    
+    h1 acronym,
+    h2 acronym,
+    h3 acronym,
+    h4 acronym,
+    h5 acronym,
+    h6 acronym,
+    a acronym,
+    h1 abbr,
+    h2 abbr,
+    h3 abbr,
+    h4 abbr,
+    h5 abbr,
+    h6 abbr,
+    a abbr {
+      border: none;
+    }
+    
+    dfn {
+      font-weight: bold;
+    }
+    
+    a.internalDFN {
+      color: inherit;
+      border-bottom: 1px solid #99c;
+      text-decoration: none;
+    }
+    
+    a.externalDFN {
+      color: inherit;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+    
+    a.bibref {
+      text-decoration: none;
+    }
+    
+    cite .bibref {
+      font-style: normal;
+    }
+    
+    code {
+      color: #C83500;
+    }
+    
+    th code {
+      color: inherit;
+    }
+    /* --- TOC --- */
+    
+    .toc a,
+    .tof a {
+      text-decoration: none;
+    }
+    
+    a .secno,
+    a .figno {
+      color: #000;
+    }
+    
+    ul.tof,
+    ol.tof {
+      list-style: none outside none;
+    }
+    
+    .caption {
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+    /* --- TABLE --- */
+    
+    table.simple {
+      border-spacing: 0;
+      border-collapse: collapse;
+      border-bottom: 3px solid #005a9c;
+    }
+    
+    .simple th {
+      background: #005a9c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+    }
+    
+    .simple th[scope="row"] {
+      background: inherit;
+      color: inherit;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple tr:nth-child(even) {
+      background: #f0f6ff;
+    }
+    /* --- DL --- */
+    
+    .section dd>p:first-child {
+      margin-top: 0;
+    }
+    
+    .section dd>p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section dd {
+      margin-bottom: 1em;
+    }
+    
+    .section dl.attrs dd,
+    .section dl.eldef dd {
+      margin-bottom: 0;
+    }
+    
+    .respec-hidden {
+      display: none;
+    }
+    
+    #respec-ui {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 202px;
+      text-align: right;
+    }
+    
+    #respec-pill,
+    .respec-info-button {
+      background: #fff;
+      height: 2.5em;
+      color: rgb(120, 120, 120);
+      border: 1px solid #ccc;
+      box-shadow: 1px 1px 8px 0 rgba(100, 100, 100, .5);
+    }
+    
+    .respec-info-button {
+      border: none;
+      border-radius: 2em;
+      margin-right: 1em;
+      min-width: 3.5em;
+    }
+    
+    #respec-pill:disabled {
+      margin: 10px auto;
+      font-size: 2.8px;
+      position: relative;
+      text-indent: -9999em;
+      border-top: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-right: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-bottom: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-left: 1.1em solid #ffffff;
+      transform: translateZ(0);
+      animation: respec-spin 1.1s infinite linear;
+      box-shadow: none;
+    }
+    
+    #respec-pill:disabled,
+    #respec-pill:disabled:after {
+      border-radius: 50%;
+      width: 10em;
+      height: 10em;
+    }
+    
+    @keyframes respec-spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    #respec-pill:hover,
+    #respec-pill:focus {
+      color: rgb(0, 0, 0);
+      transition: color .2s
+    }
+    
+    #respec-menu {
+      font-family: sans-serif;
+      background: #fff;
+      box-shadow: 1px 1px 8px 0 rgba(100, 100, 100, .5);
+      width: 200px;
+      display: none;
+      text-align: left;
+      margin-top: 5px;
+      font-size: .8em;
+    }
+    
+    .respec-save-button {
+      background: #fff;
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 5px;
+      display: block;
+      width: 100%;
+      color: #000;
+      text-decoration: none;
+      text-align: center;
+      font-size: inherit;
+    }
+    
+    #respec-ui button:focus,
+    #respec-pill:focus,
+    .respec-option:focus {
+      outline: 0;
+      outline-style: none;
+    }
+    
+    #respec-ui button.respec-pill-error {
+      background-color: red;
+      color: white;
+    }
+    
+    #respec-ui button.respec-pill-warning {
+      background-color: orange;
+      color: white;
+    }
+    
+    #respec-menu button.respec-option {
+      background: white;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: inherit;
+      padding: 1.2em 1.2em;
+    }
+    
+    #respec-menu button.respec-option:hover {
+      background-color: #eeeeee;
+    }
+    
+    .respec-cmd-icon {
+      padding-right: .5em;
+    }
+    
+    #respec-ui button.respec-option:last-child {
+      border: none;
+      border-radius: inherit;
+    }
+    
+    @media print {
+      .removeOnSave {
+        display: none;
+      }
+    }
+  </style>
+
+  <title>Volkswagen Infotainment Web Interface service definition: viwi.service.car</title>
+
+  <link rel="stylesheet" href="../../css/default.css">
+  <link rel="stylesheet" href="../../css/github.css">
+  <link rel="stylesheet" href="../../css/markdown.css">
+  <link rel="stylesheet" href="../../css/page.css">
+
+
+  <meta name="generator" content="ReSpec Developer Edition">
+  <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-Member-SUBM">
+</head>
+<body class="h-entry">
+  <div class="head">
+    <p>
+      <a class="logo" href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" width="72" height="48"></a>
+      <a href="https://www.w3.org/Submission/"> <img alt="W3C Member Submission" src="https://www.w3.org/Icons/member_subm" width="211" height="48"></a>
+    </p>
+    <h1 class="title p-name" id="title" property="dcterms:title">Volkswagen Infotainment Web Interface service definition: viwi.service.car</h1>
+    <h2><abbr title="World Wide Web Consortium">W3C</abbr> Member Submission <time property="dcterms:issued" class="dt-published" datetime="2016-12-13">13 December 2016</time></h2>
+    <dl>
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="https://www.w3.org/Submission/2016/SUBM-viwi-service-car-20161213/">https://www.w3.org/Submission/2016/SUBM-viwi-service-car-20161213/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="https://www.w3.org/Submission/viwi-service-car/">https://www.w3.org/Submission/viwi-service-car/</a></dd>
+      <dt>Editor:</dt>
+      <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0" data-editor-id="95295"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Dr. Patrick Bartsch</span>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.volkswagenag.com">Volkswagen AG</a></span>
+        <span property="rdf:rest" resource="rdf:nil"></span>
+      </dd>
+
+    </dl>
+    <p class="copyright">Copyright © 2016 <span class="notetoeditor"></span>.
+                This document is available under the <a href="http://www.w3.org/Consortium/Legal/copyright-documents">W3C
+                    Document License</a>. See the <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">W3C
+                    Intellectual Rights Notice and Legal Disclaimers</a> for additional
+                information.</p>
+    <hr title="Separator for header">
+  </div>
+<!--
+  <section id="abstract" class="introductory" property="dc:abstract">
+    <h2>Abstract</h2>
+    <p>
+      This is required.
+    </p>
+  </section>
+-->
+  <section id="sotd" class="introductory">
+    <h2>Status of This Document</h2>
+    <p>
+      <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em>
+    </p>
+
+    <p>
+      This is required.
+    </p>
+
+    <p>By publishing this document, <abbr title="World Wide Web Consortium">W3C</abbr> acknowledges that the <a href="https://www.w3.org/Submission/2016/SUBM-viwi-service-car-20161213/">Submitting Members</a> have made a formal Submission request to <abbr title="World Wide Web Consortium">W3C</abbr> for discussion. Publication of this document by <abbr title="World Wide Web Consortium">W3C</abbr> indicates no endorsement of its content by <abbr title="World Wide Web Consortium">W3C</abbr>, nor that <abbr title="World Wide Web Consortium">W3C</abbr> has, is, or will be allocating any resources to the issues addressed by it. This document is not the product of a chartered <abbr title="World Wide Web Consortium">W3C</abbr> group, but is published as potential input to the <a href="https://www.w3.org/Consortium/Process"><abbr title="World Wide Web Consortium">W3C</abbr> Process</a>. A <a href="https://www.w3.org/Submission/2016/01/Comment/"><abbr title="World Wide Web Consortium">W3C</abbr> Team Comment</a> has been published in conjunction with this Member Submission. Publication of acknowledged Member Submissions at the <abbr title="World Wide Web Consortium">W3C</abbr> site is one of the benefits of <a href="https://www.w3.org/Consortium/Prospectus/Joining"><abbr title="World Wide Web Consortium">W3C</abbr> Membership</a>. Please consult the requirements associated with Member Submissions of <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-submissions">section 3.3 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. Please consult the complete <a href="https://www.w3.org/Submission">list of acknowledged <abbr title="World Wide Web Consortium">W3C</abbr> Member Submissions</a>.</p>
+  </section>
+
+  <section>
+    <h1 style="text-align: center;">Volkswagen Infotainment Web Interface</h1>
+    <p></p>
+    <h4 style="text-align: center;">service definition: <i>viwi.service.car</i></h4>
+    <p></p>
+    <article class="markdown-body">
+      <p>&nbsp;</p>
+      <p style="text-align: center;">
+        <img src="../../img/curlies.png" alt="viwi">
+      </p>
+      <p style="text-align: center;">by Dr. Patrick Bartsch 2013-2016 </p>
+      <p>&nbsp;</p>
+      <p style="text-align: center;">version: v1.6.0-<abbr title="World Wide Web Consortium">W3C</abbr></p>
+      <p>&nbsp;</p>
+
+      <p>This repo holds all car related resources</p>
+      <h2 id="table-of-contents">Table of contents</h2>
+      <ul>
+        <li><a href="#General">General information</a>
+          <ul>
+            <li><a href="#Author">Author</a></li>
+            <li><a href="#Contributors">Contributors</a></li>
+          </ul>
+        </li>
+        <li><a href="#Resources">Resources</a>
+          <ul>
+            <li><a href="#car.info">/car/info/</a></li>
+            <li><a href="#car.environments">/car/environments/</a></li>
+            <li><a href="#car.drivingstates">/car/drivingstates/</a></li>
+            <li><a href="#car.engines">/car/engines/</a></li>
+            <li><a href="#car.consumptions">/car/consumptions/</a></li>
+            <li><a href="#car.batteries">/car/batteries/</a></li>
+            <li><a href="#car.fueltanks">/car/fueltanks/</a></li>
+            <li><a href="#car.gastanks">/car/gastanks/</a></li>
+            <li><a href="#car.gearboxes">/car/gearboxes/</a></li>
+            <li><a href="#car.distances">/car/distances/</a></li>
+            <li><a href="#car.ranges">/car/ranges/</a></li>
+            <li><a href="#car.services">/car/services/</a></li>
+            <li><a href="#car.times">/car/times/</a></li>
+            <li><a href="#car.units">/car/units/</a></li>
+            <li><a href="#car.doors">/car/doors/</a></li>
+          </ul>
+        </li>
+      </ul>
+      <h2 id="-a-name-general-a-general-information">
+        <a id="General"></a>General information</h2>
+      <p>version: 1.6.0-<abbr title="World Wide Web Consortium">W3C</abbr></p>
+      <p>Repository:</p>
+      <h3 id="-a-name-author-a-author">
+        <a id="Author"></a>Author</h3>
+      <p>Martin Wuschke &lt;martin.wuschke@volkswagen.de&gt;</p>
+      <h2 id="-a-name-resources-a-resources">
+        <a id="Resources"></a>Resources</h2>
+      <h3 id="-a-name-car-info-a-car-info-">
+        <a id="car.info"></a>/car/info/</h3>
+      <p>General information are accessible through this endpoint.</p>
+      <h4 id="-a-name-infoobject-a-infoobject">
+        <a id="infoObject"></a>infoObject</h4>
+      <h5 id="properties">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>activeClamps</td>
+            <td>the clamps being active at that moment; set to an empty list if none of them is active. Using the JSON-undefined construct is only allowed if the service is not able to deliver a clamp information.</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td>clamp_S<br>clamp_15</td>
+          </tr>
+          <tr>
+            <td>batteryVoltage</td>
+            <td>the voltage of the 12V battery</td>
+            <td>number</td>
+            <td></td>
+            <td>V</td>
+            <td>[5..17.7] @0.1</td>
+          </tr>
+          <tr>
+            <td>steering</td>
+            <td>Steering wheel is mounted either at left hand side or at right hand side.</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>left<br>right</td>
+          </tr>
+          <tr>
+            <td>vehicleIdentificationNumber</td>
+            <td>vin</td>
+            <td>string</td>
+            <td>[A-Z0-9]{17}</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>vehicleType</td>
+            <td>Value is set by diagnosis coding. It identifies the vehicle type, e.g. 'VW370'.</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>language</td>
+            <td>the language setting of the system (LCID, Locale ID)</td>
+            <td>string</td>
+            <td>language</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-info-">Resource level access (/car/info/)</h4>
+      <h5 id="get-resource-level-access-car-info">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/info/ to retrieve a list of available elements of type <a href="#infoObject">infoObject</a></p>
+      <p>Subscribe to /car/info/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-1">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/info/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/info/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/info/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-info-uuid-">Element level access (/car/info/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-info-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/info/:<em>uuid</em> to retrieve a particular <a href="#infoObject">infoObject</a></p>
+      <p>Subscribe to /car/info/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-2">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/info/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/info/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h5 id="post-element-level-access-car-info-uuid">POST</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http POST request on /car/info/:<em>uuid</em> to update a particular <a href="#infoObject">infoObject</a></p>
+      <p>Subscribe to /car/info/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-parameters-element-level-access-car-info-uuid">Request parameters</h6>
+      <p>The following parameters can be used with the request and subscriptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>mandatory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>language</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6 id="request-response-example-3">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">POST <span class="hljs-string">/car/info/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">viwi</span>": <span class="hljs-value"><span class="hljs-string">"rockz.."</span>
+</span>}</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-info-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/info/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-environments-a-car-environments-">
+        <a id="car.environments"></a>/car/environments/</h3>
+      <p>This service gives access to the environment information of the vehicle, such as light, temperature and wheather conditions</p>
+      <h4 id="-a-name-environmentobject-a-environmentobject">
+        <a id="environmentObject"></a>environmentObject</h4>
+      <h5 id="properties-element-level-access-car-info-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>darkness</td>
+            <td>set to true if darkness is recognised; may be used by the client to change its presentaion from day to night mode</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>lightIntensity</td>
+            <td>light intensity of light sensor</td>
+            <td>integer</td>
+            <td></td>
+            <td>percent</td>
+            <td>[-inf..100] @1</td>
+          </tr>
+          <tr>
+            <td>outsideTemperature</td>
+            <td>outside temperature unit</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-50..inf] @0.1</td>
+          </tr>
+          <tr>
+            <td>outsideTemperatureUnit</td>
+            <td>outside temperature unit</td>
+            <td>string</td>
+            <td>temperature</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>rainLevel</td>
+            <td>rain level</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>none<br>mizzle<br>rain<br>heavy</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-environments-">Resource level access (/car/environments/)</h4>
+      <h5 id="get-resource-level-access-car-environments">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/environments/ to retrieve a list of available elements of type <a href="#environmentObject">environmentObject</a></p>
+      <p>Subscribe to /car/environments/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-4">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/environments/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/environments/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/environments/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-environments-uuid-">Element level access (/car/environments/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-environments-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/environments/:<em>uuid</em> to retrieve a particular <a href="#environmentObject">environmentObject</a></p>
+      <p>Subscribe to /car/environments/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-5">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/environments/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/environments/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-environments-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/environments/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-drivingstates-a-car-drivingstates-">
+        <a id="car.drivingstates"></a>/car/drivingstates/</h3>
+      <p>Provides information about dynamic vehicle states.</p>
+      <h4 id="-a-name-drivingstateobject-a-drivingstateobject">
+        <a id="drivingstateObject"></a>drivingstateObject</h4>
+      <h5 id="properties-element-level-access-car-environments-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>yawRate</td>
+            <td>the yaw rate ('Gierrate') in °/s</td>
+            <td>number</td>
+            <td></td>
+            <td>deg/s</td>
+            <td>[-360..360] @0.01</td>
+          </tr>
+          <tr>
+            <td>acceleratorPosition</td>
+            <td>position of accelerator pedal, 100% means 'pedal to the metal'</td>
+            <td>integer</td>
+            <td></td>
+            <td>percent</td>
+            <td>[-inf..100]</td>
+          </tr>
+          <tr>
+            <td>accIsActive</td>
+            <td>state of adaptive cruise control system</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>blinkingState</td>
+            <td>blinking state</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>off<br>left<br>right<br>left_right</td>
+          </tr>
+          <tr>
+            <td>brakePressure</td>
+            <td>calculated brake system pressure</td>
+            <td>number</td>
+            <td></td>
+            <td>bar</td>
+            <td>[-30..276.6] @0.1</td>
+          </tr>
+          <tr>
+            <td>driverIsBraking</td>
+            <td>indicates if the driver is breaking</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>longitudinalAcceleration</td>
+            <td>the longitudinal acceleration of the vehicle</td>
+            <td>number</td>
+            <td></td>
+            <td>m/s^2</td>
+            <td>[-16..16] @0.00001</td>
+          </tr>
+          <tr>
+            <td>lateralAcceleration</td>
+            <td>the lateral acceleration of the vehicle</td>
+            <td>number</td>
+            <td></td>
+            <td>g</td>
+            <td>[-1.5..1.5] @0.01</td>
+          </tr>
+          <tr>
+            <td>torqueDistributionFrontLeft</td>
+            <td>relative torque of the wheel at front left</td>
+            <td>number</td>
+            <td></td>
+            <td>percent</td>
+            <td>[-100..100] @1</td>
+          </tr>
+          <tr>
+            <td>torqueDistributionFrontRight</td>
+            <td>relative torque of the wheel at front right</td>
+            <td>number</td>
+            <td></td>
+            <td>percent</td>
+            <td>[-100..100] @1</td>
+          </tr>
+          <tr>
+            <td>torqueDistributionRearLeft</td>
+            <td>relative torque of the wheel at rear left</td>
+            <td>number</td>
+            <td></td>
+            <td>percent</td>
+            <td>[-100..100] @1</td>
+          </tr>
+          <tr>
+            <td>torqueDistributionRearRight</td>
+            <td>relative torque of the wheel at rear right</td>
+            <td>number</td>
+            <td></td>
+            <td>percent</td>
+            <td>[-100..100] @1</td>
+          </tr>
+          <tr>
+            <td>vehicleSpeed</td>
+            <td>vehicle centerpoint speed as shown by the instrument cluster</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>vehicleSpeedUnit</td>
+            <td>unit of vehicle speed</td>
+            <td>string</td>
+            <td>speed</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>wheelAngle</td>
+            <td>steering wheel angle</td>
+            <td>number</td>
+            <td></td>
+            <td>degree (°)</td>
+            <td>[-800..800]</td>
+          </tr>
+          <tr>
+            <td>acceleratorKickDown</td>
+            <td>state of kickdown indicator on accelerator pedal</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-drivingstates-">Resource level access (/car/drivingstates/)</h4>
+      <h5 id="get-resource-level-access-car-drivingstates">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/drivingstates/ to retrieve a list of available elements of type <a href="#drivingstateObject">drivingstateObject</a></p>
+      <p>Subscribe to /car/drivingstates/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-6">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/drivingstates/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/drivingstates/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/drivingstates/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-drivingstates-uuid-">Element level access (/car/drivingstates/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-drivingstates-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/drivingstates/:<em>uuid</em> to retrieve a particular <a href="#drivingstateObject">drivingstateObject</a></p>
+      <p>Subscribe to /car/drivingstates/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-7">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/drivingstates/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/drivingstates/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-drivingstates-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/drivingstates/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-engines-a-car-engines-">
+        <a id="car.engines"></a>/car/engines/</h3>
+      <p>A car always has some kind of propulsion device like spark ignition engine, diesel engine, electric motors or hybrid machines. This endpoint provides access to information for all engines installed in the car.</p>
+      <h4 id="-a-name-engineobject-a-engineobject">
+        <a id="engineObject"></a>engineObject</h4>
+      <h5 id="properties-element-level-access-car-drivingstates-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>maxOutputPower</td>
+            <td>maximum power output of engine</td>
+            <td>integer</td>
+            <td></td>
+            <td>kW</td>
+            <td>[-inf..511] @1</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>consumptions</td>
+            <td>the consumption objects associated with the engine</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td><a href="#consumptionObject">/car/consumptions/consumptionObject</a></td>
+          </tr>
+          <tr>
+            <td>coolantTemperatureUnit</td>
+            <td>temperature unit of coolant fluid</td>
+            <td>string</td>
+            <td>temperature</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>absChargingAirPressure</td>
+            <td>the absolute charging air pressure</td>
+            <td>number</td>
+            <td></td>
+            <td>bar</td>
+            <td>[-inf..5.1] @0.01</td>
+          </tr>
+          <tr>
+            <td>currentOutputPower</td>
+            <td>output power of the engine</td>
+            <td>number</td>
+            <td></td>
+            <td>kW</td>
+            <td>[-inf..1227] @0.1</td>
+          </tr>
+          <tr>
+            <td>currentTorque</td>
+            <td>the enginges torque</td>
+            <td>integer</td>
+            <td></td>
+            <td>Nm</td>
+            <td>[-1527..1527] @1</td>
+          </tr>
+          <tr>
+            <td>engineDisplacement</td>
+            <td>the displacement of the combustion engine in liter</td>
+            <td>number</td>
+            <td></td>
+            <td>l</td>
+            <td>[-inf..12.7] @0.1</td>
+          </tr>
+          <tr>
+            <td>engineSpeed</td>
+            <td>revolutions of the engine</td>
+            <td>integer</td>
+            <td></td>
+            <td>1/min</td>
+            <td>[-inf..16384] @1</td>
+          </tr>
+          <tr>
+            <td>engineType</td>
+            <td>kind of engine</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>petrol<br>gas<br>electric<br>unknown<br>not_supported<br>petrol_diesel<br>petrol_gasoline<br>gas_CNG<br>gas_LPG</td>
+          </tr>
+          <tr>
+            <td>coolantTemperature</td>
+            <td>temperature value of coolant fluid</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-60..300] @0.1</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>maxChargingAirPressure</td>
+            <td>maximum charging pressure</td>
+            <td>number</td>
+            <td></td>
+            <td>bar</td>
+            <td>[-inf..6.3] @0.1</td>
+          </tr>
+          <tr>
+            <td>oilLevel</td>
+            <td>current oil level</td>
+            <td>number</td>
+            <td></td>
+            <td>percent</td>
+            <td>[-inf..100] @0.1</td>
+          </tr>
+          <tr>
+            <td>oilRefillVolume</td>
+            <td>the oil volume to be refilled to reach the reference (nominal) value</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf] @0.01</td>
+          </tr>
+          <tr>
+            <td>oilRefillVolumeUnit</td>
+            <td>the (variable) volume unit of property 'oilRefillVolume'</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>liter<br>gallon_UK<br>gallon_US</td>
+          </tr>
+          <tr>
+            <td>oilTemperature</td>
+            <td>the engines oil temperature; is supported for compustion engines only</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-40..378] @0.1</td>
+          </tr>
+          <tr>
+            <td>oilTemperatureUnit</td>
+            <td>current oil temperature</td>
+            <td>string</td>
+            <td>temperature</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>relChargingAirPressure</td>
+            <td>relative charging air pressure</td>
+            <td>integer</td>
+            <td></td>
+            <td>percent</td>
+            <td>[-inf..100]</td>
+          </tr>
+          <tr>
+            <td>engergystorage</td>
+            <td>the fuel tank associated with the engine</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#fueltankObject">/car/fueltanks/fueltankObject</a></td>
+          </tr>
+          <tr>
+            <td>injectionType</td>
+            <td>the combustion engines injection type</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>turbo<br>aspiration</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-engines-">Resource level access (/car/engines/)</h4>
+      <h5 id="get-resource-level-access-car-engines">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/engines/ to retrieve a list of available elements of type <a href="#engineObject">engineObject</a></p>
+      <p>Subscribe to /car/engines/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-8">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/engines/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/engines/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/engines/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-engines-uuid-">Element level access (/car/engines/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-engines-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/engines/:<em>uuid</em> to retrieve a particular <a href="#engineObject">engineObject</a></p>
+      <p>Subscribe to /car/engines/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-9">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/engines/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/engines/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-engines-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/engines/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-consumptions-a-car-consumptions-">
+        <a id="car.consumptions"></a>/car/consumptions/</h3>
+      <p>Every engine consumes some kind of energy. The consumption endpoint provides access to consumption information per engine. There might be different consumption information per engine, like longterm, shortterm, since last ignition cycle, over life-time etc. The type can be elaborated by checking the distanceObject.period linked to the consumptionObject.</p>
+      <h4 id="-a-name-consumptionobject-a-consumptionobject">
+        <a id="consumptionObject"></a>consumptionObject</h4>
+      <h5 id="properties-element-level-access-car-engines-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier uuid</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>distance</td>
+            <td>distance</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#distanceObject">/car/distances/distanceObject</a></td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td>the actual value</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>unit</td>
+            <td>consumption unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>l_per_100km<br>km_per_l<br>l_per_h<br>mpg_UK<br>mpg_US<br>gallon_per_h<br>kg_per_100km<br>km_per_kg<br>kg_per_h<br>m3_per_100km<br>km_per_m3<br>m3_per_h<br>miles_per_lbs<br>lbs_per_h<br>miles_per_yard3<br>yard3_per_h<br>kWh_per_100km<br>km_per_kWh<br>kWh_per_mile<br>miles_per_kWh<br>kW<br>miles_per_kg<br>miles_per_m3<br>mpge_US</td>
+          </tr>
+          <tr>
+            <td>engine</td>
+            <td>the engine that consumed the energy</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#engineObject">/car/engines/engineObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-consumptions-">Resource level access (/car/consumptions/)</h4>
+      <h5 id="get-resource-level-access-car-consumptions">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/consumptions/ to retrieve a list of available elements of type <a href="#consumptionObject">consumptionObject</a></p>
+      <p>Subscribe to /car/consumptions/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-10">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/consumptions/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/consumptions/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/consumptions/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-consumptions-uuid-">Element level access (/car/consumptions/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-consumptions-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/consumptions/:<em>uuid</em> to retrieve a particular <a href="#consumptionObject">consumptionObject</a></p>
+      <p>Subscribe to /car/consumptions/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-11">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/consumptions/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/consumptions/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-consumptions-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/consumptions/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-batteries-a-car-batteries-">
+        <a id="car.batteries"></a>/car/batteries/</h3>
+      <p>All installed traction batteries will provide their information through this endpoint.</p>
+      <h4 id="-a-name-batteryobject-a-batteryobject">
+        <a id="batteryObject"></a>batteryObject</h4>
+      <h5 id="properties-element-level-access-car-consumptions-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>soc</td>
+            <td>state of charge</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>socUnit</td>
+            <td>state of charge unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>kWh<br>percent</td>
+          </tr>
+          <tr>
+            <td>nominalVoltage</td>
+            <td>nominal voltage</td>
+            <td>number</td>
+            <td></td>
+            <td>V</td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>currentVoltage</td>
+            <td>current voltage</td>
+            <td>number</td>
+            <td></td>
+            <td>V</td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>current</td>
+            <td>delivered current</td>
+            <td>number</td>
+            <td></td>
+            <td>A</td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>capacity</td>
+            <td>total capacity</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>capacityUnit</td>
+            <td>total capacity unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>kWh</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-batteries-">Resource level access (/car/batteries/)</h4>
+      <h5 id="get-resource-level-access-car-batteries">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/batteries/ to retrieve a list of available elements of type <a href="#batteryObject">batteryObject</a></p>
+      <p>Subscribe to /car/batteries/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-12">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/batteries/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/batteries/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/batteries/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-batteries-uuid-">Element level access (/car/batteries/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-batteries-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/batteries/:<em>uuid</em> to retrieve a particular <a href="#batteryObject">batteryObject</a></p>
+      <p>Subscribe to /car/batteries/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-13">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/batteries/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/batteries/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-batteries-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/batteries/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-fueltanks-a-car-fueltanks-">
+        <a id="car.fueltanks"></a>/car/fueltanks/</h3>
+      <p>All installed fuel tanks will provide their information through this endpoint.</p>
+      <h4 id="-a-name-fueltankobject-a-fueltankobject">
+        <a id="fueltankObject"></a>fueltankObject</h4>
+      <h5 id="propertieselement-level-access-car-batteries-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>fuelWarning</td>
+            <td>indicates fuel tank runing out of fuel if set to 'true'</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>level</td>
+            <td>level of tankage</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>volumeUnit</td>
+            <td>total volume unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>l<br>gal_UK<br>gal_US</td>
+          </tr>
+          <tr>
+            <td>refillVolume</td>
+            <td>the volume needed to refill the tank to its maximum</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>refillVolumeUnit</td>
+            <td>the unit belonging to property 'refillVolume'</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>l<br>gal_UK<br>gal_US</td>
+          </tr>
+          <tr>
+            <td>volume</td>
+            <td>the nominal capacity of fueltank</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>levelUnit</td>
+            <td>level unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>l<br>percent</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-fueltanks-">Resource level access (/car/fueltanks/)</h4>
+      <h5 id="get-resource-level-access-car-fueltanks">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/fueltanks/ to retrieve a list of available elements of type <a href="#fueltankObject">fueltankObject</a></p>
+      <p>Subscribe to /car/fueltanks/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-14">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/fueltanks/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/fueltanks/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/fueltanks/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-fueltanks-uuid-">Element level access (/car/fueltanks/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-fueltanks-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/fueltanks/:<em>uuid</em> to retrieve a particular <a href="#fueltankObject">fueltankObject</a></p>
+      <p>Subscribe to /car/fueltanks/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-15">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/fueltanks/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/fueltanks/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-fueltanks-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/fueltanks/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-gastanks-a-car-gastanks-">
+        <a id="car.gastanks"></a>/car/gastanks/</h3>
+      <p>All installed gastanks will provide their information through this endpoint.</p>
+      <h4 id="-a-name-gastankobject-a-gastankobject">
+        <a id="gastankObject"></a>gastankObject</h4>
+      <h5 id="properties-element-level-access-car-fueltanks-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>level</td>
+            <td>current gas level</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>levelUnit</td>
+            <td>current gas level unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>kg<br>percent</td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td>gas type</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>CNG<br>LPG</td>
+          </tr>
+          <tr>
+            <td>nominalCapacity</td>
+            <td>nominal capacity</td>
+            <td>number</td>
+            <td></td>
+            <td>kg</td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>levelWarning</td>
+            <td>level warning active flag</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>refillVolume</td>
+            <td>the volume needed to refill the gastank to its maximum</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>refillVolumeUnit</td>
+            <td>the unit belonging to property 'refillVolume'</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>kg<br>m^3</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-gastanks-">Resource level access (/car/gastanks/)</h4>
+      <h5 id="get-resource-level-access-car-gastanks">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/gastanks/ to retrieve a list of available elements of type <a href="#gastankObject">gastankObject</a></p>
+      <p>Subscribe to /car/gastanks/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-16">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/gastanks/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/gastanks/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/gastanks/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-gastanks-uuid-">Element level access (/car/gastanks/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-gastanks-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/gastanks/:<em>uuid</em> to retrieve a particular <a href="#gastankObject">gastankObject</a></p>
+      <p>Subscribe to /car/gastanks/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-17">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/gastanks/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/gastanks/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-gastanks-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/gastanks/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-gearboxes-a-car-gearboxes-">
+        <a id="car.gearboxes"></a>/car/gearboxes/</h3>
+      <p>Information of all gearboxes installed in the vehicle are accessible here.</p>
+      <h4 id="-a-name-gearboxobject-a-gearboxobject">
+        <a id="gearboxObject"></a>gearboxObject</h4>
+      <h5 id="properties-element-level-access-car-gastanks-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>currentGear</td>
+            <td>the numeric value of the current gear, value '0' corresponds to 'no gear'</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..10]</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>clutchedIn</td>
+            <td>state of clutch, set to 'true' if clutched-in</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>coastingIsActive</td>
+            <td>set to 'true' when car is coasting</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>reverseGearIsEngaged</td>
+            <td>Set to'true' if the reverse gear is engaged, else set to 'false'.</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>gearboxOilTemperaturUnit</td>
+            <td>the unit for the oil temperature</td>
+            <td>string</td>
+            <td>temperature</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>gearTransmissionMode</td>
+            <td>transmission mode</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>no_position<br>position_P<br>position_R<br>position_N<br>position_D<br>position_S<br>position_M_tap<br>position_M_brief<br>position_E<br>position_B<br>position_MS<br>position_S_plus<br>position_MS_plus</td>
+          </tr>
+          <tr>
+            <td>recommendedGear</td>
+            <td>the recommended gear as shown to the driver</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>gear1<br>gear2<br>gear3<br>gear4<br>gear5<br>gear6<br>gear7<br>gear8<br>gear9<br>gear10<br>noRecommendation</td>
+          </tr>
+          <tr>
+            <td>gearboxOilTemperature</td>
+            <td>oil temperature in the gearbox</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-73..385] @1</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-gearboxes-">Resource level access (/car/gearboxes/)</h4>
+      <h5 id="get-resource-level-access-car-gearboxes">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/gearboxes/ to retrieve a list of available elements of type <a href="#gearboxObject">gearboxObject</a></p>
+      <p>Subscribe to /car/gearboxes/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-18">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/gearboxes/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/gearboxes/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/gearboxes/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-gearboxes-uuid-">Element level access (/car/gearboxes/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-gearboxes-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/gearboxes/:<em>uuid</em> to retrieve a particular <a href="#gearboxObject">gearboxObject</a></p>
+      <p>Subscribe to /car/gearboxes/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-19">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/gearboxes/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/gearboxes/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-gearboxes-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/gearboxes/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-distances-a-car-distances-">
+        <a id="car.distances"></a>/car/distances/</h3>
+      <p>Different odometer information are available on this endpoint.</p>
+      <h4 id="-a-name-distanceobject-a-distanceobject">
+        <a id="distanceObject"></a>distanceObject</h4>
+      <h5 id="properties-element-level-access-car-gearboxes-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>averageVehicleSpeed</td>
+            <td>average vehicle speed value</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..400] @0.1</td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td>actual distance</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf] @0.1</td>
+          </tr>
+          <tr>
+            <td>valueUnit</td>
+            <td>unit of distance</td>
+            <td>string</td>
+            <td>distance</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>zeDistanceUnit</td>
+            <td>the unit belonging to property 'zeDistance'</td>
+            <td>string</td>
+            <td>distance</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>averageVehicleSpeedUnit</td>
+            <td>unit of speed</td>
+            <td>string</td>
+            <td>speed</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>period</td>
+            <td>the logical level all the properties within this object apply to</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>short<br>long<br>cycle<br>current<br>total</td>
+          </tr>
+          <tr>
+            <td>resetTimeStamp</td>
+            <td>date and time when this boardcomputer 'period' was reset the last time</td>
+            <td>string</td>
+            <td>dateTime</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>time</td>
+            <td>the time needed to cover this distance / related to this distance</td>
+            <td>integer</td>
+            <td></td>
+            <td>minute</td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>zeDistance</td>
+            <td>the absolute distance covered without any emissions</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..100000] @0.1</td>
+          </tr>
+          <tr>
+            <td>zeTime</td>
+            <td>the time traveled without any emissions</td>
+            <td>integer</td>
+            <td></td>
+            <td>minute</td>
+            <td>[-inf..600000]</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-distances-">Resource level access (/car/distances/)</h4>
+      <h5 id="get-resource-level-access-car-distances">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/distances/ to retrieve a list of available elements of type <a href="#distanceObject">distanceObject</a></p>
+      <p>Subscribe to /car/distances/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-20">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/distances/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/distances/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/distances/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-distances-uuid-">Element level access (/car/distances/:<em>uuid</em>)</h3>
+      <h5 id="post-element-level-access-car-distances-uuid">POST</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http POST request on /car/distances/:<em>uuid</em> to update a particular <a href="#distanceObject">distanceObject</a></p>
+      <p>Subscribe to /car/distances/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-parameters-element-level-access-car-distances-uuid">Request parameters</h6>
+      <p>The following parameters can be used with the request and subscriptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>mandatory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>time</td>
+            <td>integer</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td>number</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6 id="request-response-example-21">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">POST <span class="hljs-string">/car/distances/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">viwi</span>": <span class="hljs-value"><span class="hljs-string">"rockz.."</span>
+</span>}</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h5 id="get-element-level-access-car-distances-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/distances/:<em>uuid</em> to retrieve a particular <a href="#distanceObject">distanceObject</a></p>
+      <p>Subscribe to /car/distances/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-22">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/distances/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/distances/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-distances-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/distances/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-ranges-a-car-ranges-">
+        <a id="car.ranges"></a>/car/ranges/</h3>
+      <p>This endpoint reflects the range a vehicle can drive in its current state. The range is affected by different parameters such as engine load, battery load, driving style, slopes and curvature of the road etc. Thus, the range will change frequently, a subscription is recommended.</p>
+      <h4 id="-a-name-rangeobject-a-rangeobject">
+        <a id="rangeObject"></a>rangeObject</h4>
+      <h5 id="properties-element-level-access-car-distances-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td>actual value</td>
+            <td>number</td>
+            <td></td>
+            <td></td>
+            <td>[-inf..inf]</td>
+          </tr>
+          <tr>
+            <td>valueUnit</td>
+            <td>unit of range value</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>km<br>mi</td>
+          </tr>
+          <tr>
+            <td>engergystorage</td>
+            <td>the energy source associated with the range</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#fueltankObject">/car/fueltanks/fueltankObject</a><br><a href="#batteryObject">/car/batteries/batteryObject</a><br><a href="#gastankObject">/car/gastanks/gastankObject</a></td>
+          </tr>
+          <tr>
+            <td>engine</td>
+            <td>the engine associated with the range</td>
+            <td>object</td>
+            <td></td>
+            <td></td>
+            <td><a href="#engineObject">/car/engines/engineObject</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-ranges-">Resource level access (/car/ranges/)</h4>
+      <h5 id="get-resource-level-access-car-ranges">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/ranges/ to retrieve a list of available elements of type <a href="#rangeObject">rangeObject</a></p>
+      <p>Subscribe to /car/ranges/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-23">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/ranges/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/ranges/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/ranges/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-ranges-uuid-">Element level access (/car/ranges/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-ranges-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/ranges/:<em>uuid</em> to retrieve a particular <a href="#rangeObject">rangeObject</a></p>
+      <p>Subscribe to /car/ranges/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-24">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/ranges/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/ranges/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-ranges-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/ranges/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-services-a-car-services-">
+        <a id="car.services"></a>/car/services/</h3>
+      <p>This endpoint provides information about customer care / necessary vehicle inspection or oil service.</p>
+      <h4 id="-a-name-serviceobject-a-serviceobject">
+        <a id="serviceObject"></a>serviceObject</h4>
+      <h5 id="properties-element-level-access-car-ranges-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>name, shall be equal to content of property 'typeOfService'</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>typeOfService</td>
+            <td>The service data are related either to inspection service or to oil service.</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>inspection<br>oil<br>airFilter<br>oilFilter</td>
+          </tr>
+          <tr>
+            <td>distance</td>
+            <td>The distance in miles or kilometers when the service is due or since the service is overdue. If the service is overdue, then distance &lt; 0. If the service is due today, the distance == 0. If the service is due in &lt;x&gt; km or mls, then distance == x.</td>
+            <td>integer</td>
+            <td></td>
+            <td></td>
+            <td>[-204700..204700]</td>
+          </tr>
+          <tr>
+            <td>distanceunit</td>
+            <td>the variable unit belonging to the property 'distance'</td>
+            <td>string</td>
+            <td>distance</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>time</td>
+            <td>The time in days when the service is due or overdue. If the service is overdue, then time &lt; 0. If the service is due today, the time == 0. If the service is due in &lt;x&gt; days, the time == x.</td>
+            <td>integer</td>
+            <td></td>
+            <td>d</td>
+            <td>[-2048..2048]</td>
+          </tr>
+          <tr>
+            <td>intervalReset</td>
+            <td>the interval to be or being reset in a comma separated list</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td>distance<br>time</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-services-">Resource level access (/car/services/)</h4>
+      <h5 id="get-resource-level-access-car-services">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/services/ to retrieve a list of available elements of type <a href="#serviceObject">serviceObject</a></p>
+      <p>Subscribe to /car/services/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-25">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/services/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/services/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/services/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-services-uuid-">Element level access (/car/services/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-services-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/services/:<em>uuid</em> to retrieve a particular <a href="#serviceObject">serviceObject</a></p>
+      <p>Subscribe to /car/services/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-26">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/services/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/services/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h5 id="post-element-level-access-car-services-uuid">POST</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http POST request on /car/services/:<em>uuid</em> to update a particular <a href="#serviceObject">serviceObject</a></p>
+      <p>Subscribe to /car/services/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-parameters-element-level-access-car-services-uuid">Request parameters</h6>
+      <p>The following parameters can be used with the request and subscriptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>mandatory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>intervalReset</td>
+            <td>array</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6 id="request-response-example-27">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">POST <span class="hljs-string">/car/services/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">viwi</span>": <span class="hljs-value"><span class="hljs-string">"rockz.."</span>
+</span>}</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-services-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/services/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-times-a-car-times-">
+        <a id="car.times"></a>/car/times/</h3>
+      <p>This endpoint provides information about the vehicle clock.</p>
+      <h4 id="-a-name-timeobject-a-timeobject">
+        <a id="timeObject"></a>timeObject</h4>
+      <h5 id="properties-element-level-access-car-services-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>vehicleDate</td>
+            <td>the vehicles date</td>
+            <td>string</td>
+            <td>date</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>vehicleTime</td>
+            <td>the vehicles time</td>
+            <td>string</td>
+            <td>time</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>isDaylightSavingAutomaticMode</td>
+            <td>'true' in case of automatic daylight saving mode activation, else set to 'false'. This property is alternative to property 'isDaylightSavingTime'.</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>isDaylightSavingTime</td>
+            <td>true if in case of daylight saving time, otherwise false. This property is alternative to property 'isDaylightSavingAutomaticMode'.</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>clockSourcesInstallation</td>
+            <td>comma separated list of the installed clocks. One of them may be set to be the active clock (clock source)</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td>quartz<br>gps</td>
+          </tr>
+          <tr>
+            <td>clockSource</td>
+            <td>the active clock (source)</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>quartz<br>gps</td>
+          </tr>
+          <tr>
+            <td>utcOffset</td>
+            <td>Contains the offset to UTC. This information corresponds to the time zone.</td>
+            <td>number</td>
+            <td></td>
+            <td>min</td>
+            <td>[-720..840] @5</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-times-">Resource level access (/car/times/)</h4>
+      <h5 id="get-resource-level-access-car-times">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/times/ to retrieve a list of available elements of type <a href="#timeObject">timeObject</a></p>
+      <p>Subscribe to /car/times/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-28">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/times/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/times/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/times/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-times-uuid-">Element level access (/car/times/:<em>uuid</em>)</h3>
+      <h5 id="get-element-level-access-car-times-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/times/:<em>uuid</em> to retrieve a particular <a href="#timeObject">timeObject</a></p>
+      <p>Subscribe to /car/times/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-29">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/times/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/times/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h5 id="post-element-level-access-car-times-uuid">POST</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http POST request on /car/times/:<em>uuid</em> to update a particular <a href="#timeObject">timeObject</a></p>
+      <p>Subscribe to /car/times/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-parameters-element-level-access-car-times-uuid">Request parameters</h6>
+      <p>The following parameters can be used with the request and subscriptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>mandatory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>vehicleTime</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>vehicleDate</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>isDaylightSavingAutomaticMode</td>
+            <td>boolean</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>isDaylightSavingTime</td>
+            <td>boolean</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>clockSource</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>utcOffset</td>
+            <td>number</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6 id="request-response-example-30">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">POST <span class="hljs-string">/car/times/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">viwi</span>": <span class="hljs-value"><span class="hljs-string">"rockz.."</span>
+</span>}</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-times-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/times/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-units-a-car-units-">
+        <a id="car.units"></a>/car/units/</h3>
+      <p>Units are controlled by a dedicated service systemwide. The unit settings are unified for consistent behavior on all user interfaces. If a client like rear seat entertainment units need to display different units, then the conversion from system settings to desired client output is considered a `client issue`.</p>
+      <h4 id="-a-name-unitobject-a-unitobject">
+        <a id="unitObject"></a>unitObject</h4>
+      <h5 id="properties-element-level-access-car-times-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>isFactoryDefault</td>
+            <td>Use this property to set the units to their factory default values.</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>pressure</td>
+            <td>global pressure unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>bar<br>psi<br>kPa</td>
+          </tr>
+          <tr>
+            <td>consumptionGas</td>
+            <td>global gas consumption unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>kg_per_100km<br>km_per_kg<br>m3_per_100km<br>km_per_m3<br>miles_per_lbs<br>miles_per_yard3<br>miles_per_kg<br>miles_per_m3<br>mpge_US</td>
+          </tr>
+          <tr>
+            <td>consumptionPetrol</td>
+            <td>global petrol consumption unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>l_per_100km<br>km_per_l<br>mpg_UK<br>mpg_US</td>
+          </tr>
+          <tr>
+            <td>date</td>
+            <td>global date format w/o time</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>day_month_year<br>month_day_year<br>year_month_day</td>
+          </tr>
+          <tr>
+            <td>supportedConsumptionUnits</td>
+            <td>comma separated list of consumption units supported by the system, content depends on engines installed in this car</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td>l_per_100km<br>km_per_l<br>mpg_UK<br>mpg_US<br>kg_per_100km<br>km_per_kg<br>m3_per_100km<br>km_per_m3<br>miles_per_lbs<br>miles_per_yard3<br>kWh_per_100km<br>km_per_kWh<br>kWh_per_mile<br>miles_per_kWh<br>miles_per_kg<br>miles_per_m3<br>mpge_US</td>
+          </tr>
+          <tr>
+            <td>speed</td>
+            <td>global speed unit</td>
+            <td>string</td>
+            <td>speed</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>shown name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>consumptionElectric</td>
+            <td>global electric consumption unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>kWh_per_100km<br>km_per_kWh<br>kWh_per_mile<br>miles_per_kWh<br>mpge_US</td>
+          </tr>
+          <tr>
+            <td>temperature</td>
+            <td>global temperature unit</td>
+            <td>string</td>
+            <td>temperature</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>time</td>
+            <td>global time format</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>24h<br>12h</td>
+          </tr>
+          <tr>
+            <td>volume</td>
+            <td>global volume unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>l<br>gal_UK<br>gal_US<br>m^3<br>yd^3<br>kWh</td>
+          </tr>
+          <tr>
+            <td>supportedVolumeUnits</td>
+            <td>comma separated list of the volume units supported by the system</td>
+            <td>array</td>
+            <td></td>
+            <td></td>
+            <td>l<br>gal_UK<br>gal_US<br>m^3<br>yd^3<br>kWh</td>
+          </tr>
+          <tr>
+            <td>distance</td>
+            <td>global distance unit</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>mi<br>km</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-units-">Resource level access (/car/units/)</h4>
+      <h5 id="get-resource-level-access-car-units">GET</h5>
+      <p><strong>Note</strong>: Use a http GET request on /car/units/ to retrieve a list of available elements of type <a href="#unitObject">unitObject</a></p>
+      <p>Subscribe to /car/units/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-31">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/units/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/units/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/units/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-units-uuid-">Element level access (/car/units/:<em>uuid</em>)</h3>
+      <h5 id="post-element-level-access-car-units-uuid">POST</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http POST request on /car/units/:<em>uuid</em> to update a particular <a href="#unitObject">unitObject</a></p>
+      <p>Subscribe to /car/units/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-parameters-element-level-access-car-units-uuid">Request parameters</h6>
+      <p>The following parameters can be used with the request and subscriptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>mandatory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>consumptionElectric</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>consumptionGas</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>consumptionPetrol</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>date</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>distance</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>speed</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>isFactoryDefault</td>
+            <td>boolean</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>temperature</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>time</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>volume</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>pressure</td>
+            <td>string</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6 id="request-response-example-32">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">POST <span class="hljs-string">/car/units/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">viwi</span>": <span class="hljs-value"><span class="hljs-string">"rockz.."</span>
+</span>}</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h5 id="get-element-level-access-car-units-uuid">GET</h5>
+      <p><strong>Note</strong>:</p>
+      <p>Use a http GET request on /car/units/:<em>uuid</em> to retrieve a particular <a href="#unitObject">unitObject</a></p>
+      <p>Subscribe to /car/units/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-33">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/units/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/units/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-units-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/units/:<em>uuid</em> (element level)</li>
+      </ul>
+      <h3 id="-a-name-car-doors-a-car-doors-">
+        <a id="car.doors"></a>/car/doors/</h3>
+      <p>Provides information about each vehicle door including bonnet and boot.</p>
+      <h4 id="-a-name-doorobject-a-doorobject">
+        <a id="doorObject"></a>doorObject</h4>
+      <h5 id="properties-element-level-access-car-units-uuid">Properties</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>type</th>
+            <th>format</th>
+            <th>unit(s)</th>
+            <th>value(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>identifier</td>
+            <td>string</td>
+            <td>uuid</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>name</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uri</td>
+            <td>object uri</td>
+            <td>string</td>
+            <td>uri</td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>position</td>
+            <td>the vehicle door position</td>
+            <td>string</td>
+            <td></td>
+            <td></td>
+            <td>bonnet<br>front_left<br>front_right<br>rear_left<br>rear_right<br>boot</td>
+          </tr>
+          <tr>
+            <td>isDoorOpen</td>
+            <td>the door state; set to 'true' if the door is open</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>isWindowOpen</td>
+            <td>the window state of this door; set to 'true' if window is open; set to JSON-undefined if window state is unknown or invalid</td>
+            <td>boolean</td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 id="resource-level-access-car-doors-">Resource level access (/car/doors/)</h4>
+      <h5 id="get-resource-level-access-car-doors">GET</h5>
+      <p>the vehicles doors</p>
+      <p><strong>Note</strong>: Use a http GET request on /car/doors/ to retrieve a list of available elements of type <a href="#doorObject">doorObject</a></p>
+      <p>Subscribe to /car/doors/ to receive updates for element creations or removals from the collection.</p>
+      <h6 id="request-response-example-34">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/doors/</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <p>=&gt;</p>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/doors/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"8901870-b526-11e3-a5e2-0800200c9a66"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"dolor sit"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/doors/8901870-b526-11e3-a5e2-0800200c9a66"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="element-level-access-car-doors-uuid-">Element level access (/car/doors/:<em>uuid</em>)</h3>
+      <h5 id="post-element-level-access-car-doors-uuid">POST</h5>
+      <p><strong>Note</strong>: the vehicles doors Use a http POST request on /car/doors/:<em>uuid</em> to update a particular <a href="#doorObject">doorObject</a></p>
+      <p>Subscribe to /car/doors/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-parameters-element-level-access-car-doors-uuid">Request parameters</h6>
+      <p>The following parameters can be used with the request and subscriptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>mandatory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <h6 id="request-response-example-35">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">POST <span class="hljs-string">/car/doors/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">viwi</span>": <span class="hljs-value"><span class="hljs-string">"rockz.."</span>
+</span>}</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">201</span> Created</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span>
+</span>}</span></code>
+</code></pre>
+      <h5 id="get-element-level-access-car-doors-uuid">GET</h5>
+      <p><strong>Note</strong>: the vehicles doors Use a http GET request on /car/doors/:<em>uuid</em> to retrieve a particular <a href="#doorObject">doorObject</a></p>
+      <p>Subscribe to /car/doors/:<em>uuid</em> to receive updates on element level changes.</p>
+      <h6 id="request-response-example-36">Request/response example</h6>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-request">GET <span class="hljs-string">/car/doors/3901a278-ba17-44d6-9aef-f7ca67c04840</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">127.0.0.1:9000</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">User-Agent</span>: <span class="hljs-string">Chrome/34.0.1847.137 Safari/537.36</span>
+<span class="hljs-attribute">Accept-Encoding</span>: <span class="hljs-string">gzip,deflate</span>
+<span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en-US,en;q=0.8,de;q=0.6</span></code>
+</code></pre>
+      <pre><code class="lang-lang-none"><code class="hljs http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Vary</span>: <span class="hljs-string">Accept-Encoding</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+<span class="hljs-attribute">ETag</span>: <span class="hljs-string">"-32550834"</span>
+<span class="hljs-attribute">Content-Encoding</span>: <span class="hljs-string">gzip</span>
+<span class="hljs-attribute">Date</span>: <span class="hljs-string">Tue, 07 Apr 1980 00:00:00 GMT</span>
+<span class="hljs-attribute">Connection</span>: <span class="hljs-string">keep-alive</span>
+<span class="hljs-attribute">Transfer-Encoding</span>: <span class="hljs-string">chunked</span>
+
+<span class="json">
+{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"ok"</span></span>,
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3901a278-ba17-44d6-9aef-f7ca67c04840"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"lorem ipsum"</span></span>,
+      "<span class="hljs-attribute">uri</span>": <span class="hljs-value"><span class="hljs-string">"/car/doors/3901a278-ba17-44d6-9aef-f7ca67c04840"</span>
+    </span>}
+  ]
+</span>}</span></code>
+</code></pre>
+      <h3 id="events-element-level-access-car-doors-uuid">Events</h3>
+      <p>The following events may be fired by client interaction or system side:</p>
+      <ul>
+        <li>/car/doors/:<em>uuid</em> (element level)</li>
+      </ul>
+    </article>
+  </section>
+</body>
+</html>
