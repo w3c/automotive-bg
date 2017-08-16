@@ -1,0 +1,665 @@
+{
+  "name": "viwi.service.medialibrary",
+  "description": "",
+  "resources": {
+    "sources": {
+      "description": "This endpoint provides access to the media sources available in the media library.",
+      "model": {
+        "name": "mediaLibrarySourceObject",
+        "resource": "medialibrary.sources",
+        "properties": {
+          "id": {
+            "description": "identifier",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "source name",
+            "type": "string"
+          },
+          "uri": {
+            "description": "object uri",
+            "type": "string",
+            "format": "uri"
+          },
+          "rootfolder": {
+            "description": "the sources root folder, only set if medium is plugged in, undefined otherwise",
+            "type": "object",
+            "oneOf": [
+              {
+                "#ref": "medialibrary.folders.folderObject"
+              }
+            ]
+          }
+        }
+      },
+      "endpoints": {
+        "resource": {
+          "get": {
+            "parameters": {}
+          }
+        },
+        "element": {
+          "get": {
+            "parameters": {}
+          }
+        }
+      },
+      "systemTriggeredEvents": [
+        "resource"
+      ]
+    },
+    "tracks": {
+      "description": "Provides a list of all tracks available in the system, might contain connected devices content as well.",
+      "model": {
+        "name": "trackObject",
+        "resource": "medialibrary.tracks",
+        "properties": {
+          "id": {
+            "description": "identifier",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "Track title",
+            "type": "string"
+          },
+          "uri": {
+            "description": "object uri",
+            "type": "string",
+            "format": "uri"
+          },
+          "image": {
+            "description": "cover art",
+            "type": "string",
+            "format": "uri"
+          },
+          "genres": {
+            "description": "track genre",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.genres.genreObject"
+                }
+              ]
+            }
+          },
+          "folders": {
+            "description": "actual folder the item resides in",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.folders.folderObject"
+                }
+              ]
+            }
+          },
+          "rating": {
+            "description": "owner rating",
+            "type": "integer",
+            "minimum": 0
+          },
+          "albums": {
+            "description": "albums containing this track",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.albums.albumObject"
+                }
+              ]
+            }
+          },
+          "artists": {
+            "description": "track artists",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.artists.artistObject"
+                }
+              ]
+            }
+          },
+          "date": {
+            "description": "release date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "disc": {
+            "description": "disc of album",
+            "type": "integer",
+            "minimum": 0
+          },
+          "duration": {
+            "description": "track duration",
+            "type": "integer",
+            "minimum": 0,
+            "unit": "s"
+          },
+          "source": {
+            "description": "Source of the file",
+            "type": "object",
+            "oneOf": [
+              {
+                "#ref": "medialibrary.sources.mediaLibrarySourceObject"
+              }
+            ]
+          }
+        }
+      },
+      "endpoints": {
+        "resource": {
+          "get": {
+            "parameters": {}
+          }
+        },
+        "element": {
+          "get": {
+            "parameters": {}
+          }
+        }
+      },
+      "systemTriggeredEvents": [
+        "resource"
+      ]
+    },
+    "albums": {
+      "description": "Provides a list of all albums available in the system, might contain connected devices content as well.",
+      "model": {
+        "name": "albumObject",
+        "resource": "medialibrary.albums",
+        "properties": {
+          "id": {
+            "description": "Identifier",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "album title",
+            "type": "string"
+          },
+          "uri": {
+            "description": "object uri",
+            "type": "string",
+            "format": "uri"
+          },
+          "genres": {
+            "description": "album genre",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.genres.genreObject"
+                }
+              ]
+            }
+          },
+          "image": {
+            "description": "album art",
+            "type": "string",
+            "format": "uri"
+          },
+          "rating": {
+            "description": "album rating",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "artists": {
+            "description": "album artist",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.artists.artistObject"
+                }
+              ]
+            }
+          },
+          "date": {
+            "description": "release date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "description": "total album duration",
+            "type": "integer",
+            "minimum": 0,
+            "unit": "sec"
+          },
+          "tracks": {
+            "description": "album tracks",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.tracks.trackObject"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "endpoints": {
+        "resource": {
+          "get": {
+            "parameters": {}
+          }
+        },
+        "element": {
+          "get": {
+            "parameters": {}
+          }
+        }
+      },
+      "systemTriggeredEvents": [
+        "resource"
+      ]
+    },
+    "artists": {
+      "description": "Provides a list of all known artists, might contain connected devices content as well.",
+      "model": {
+        "name": "artistObject",
+        "resource": "medialibrary.artists",
+        "properties": {
+          "id": {
+            "description": "identifier",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "artist name",
+            "type": "string"
+          },
+          "uri": {
+            "description": "object uri",
+            "type": "string",
+            "format": "uri"
+          },
+          "genres": {
+            "description": "artist genre",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.genres.genreObject"
+                }
+              ]
+            }
+          },
+          "image": {
+            "description": "artist art",
+            "type": "string",
+            "format": "uri"
+          },
+          "rating": {
+            "description": "owner rating",
+            "type": "integer",
+            "minimum": 0
+          },
+          "albums": {
+            "description": "artist albums",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.albums.albumObject"
+                }
+              ]
+            }
+          },
+          "tracks": {
+            "description": "artists tracks",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.tracks.trackObject"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "endpoints": {
+        "resource": {
+          "get": {
+            "parameters": {}
+          }
+        },
+        "element": {
+          "get": {
+            "parameters": {}
+          }
+        }
+      },
+      "systemTriggeredEvents": [
+        "resource"
+      ]
+    },
+    "genres": {
+      "description": "Provides an aggregated view over all known genres an the media related to it.",
+      "model": {
+        "name": "genreObject",
+        "resource": "medialibrary.genres",
+        "properties": {
+          "id": {
+            "description": "identifier",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "genre name",
+            "type": "string"
+          },
+          "uri": {
+            "description": "object uri",
+            "type": "string",
+            "format": "uri"
+          },
+          "rating": {
+            "description": "owner rating",
+            "type": "integer",
+            "minimum": 0
+          },
+          "tracks": {
+            "description": "artists tracks",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.tracks.trackObject"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "endpoints": {
+        "resource": {
+          "get": {
+            "parameters": {}
+          }
+        },
+        "element": {
+          "get": {
+            "parameters": {}
+          }
+        }
+      }
+    },
+    "playlists": {
+      "description": "Provides a list of all playlists available in the system, might contain connected devices content as well.",
+      "model": {
+        "name": "playlistObject",
+        "resource": "medialibrary.playlists",
+        "properties": {
+          "id": {
+            "description": "identifier",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "playlist name",
+            "type": "string"
+          },
+          "uri": {
+            "description": "object uri",
+            "type": "string",
+            "format": "uri"
+          },
+          "genres": {
+            "description": "playlist genre",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.genres.genreObject"
+                }
+              ]
+            }
+          },
+          "folders": {
+            "description": "actual folder the item resides in",
+            "type": "object",
+            "oneOf": [
+              {
+                "#ref": "medialibrary.folders.folderObject"
+              }
+            ]
+          },
+          "image": {
+            "description": "playlist art",
+            "type": "string",
+            "format": "uri"
+          },
+          "rating": {
+            "description": "owner rating",
+            "type": "integer",
+            "minimum": 0
+          },
+          "artists": {
+            "description": "playlist artists",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.artists.artistObject"
+                }
+              ]
+            }
+          },
+          "date": {
+            "description": "last modification",
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "description": "total duration",
+            "type": "integer",
+            "minimum": 0,
+            "unit": "s"
+          },
+          "tracks": {
+            "description": "playlist tracks",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.tracks.trackObject"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "endpoints": {
+        "resource": {
+          "post": {
+            "parameters": {
+              "resource": "medialibrary.playlists",
+              "method": "post",
+              "description": "",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "description": "playlist name",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "get": {
+            "parameters": {}
+          }
+        },
+        "element": {
+          "post": {
+            "parameters": {
+              "resource": "medialibrary.playlists",
+              "method": "post",
+              "description": "",
+              "properties": {
+                "tracks": {
+                  "description": "track identifiers",
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                },
+                "rating": {
+                  "description": "owner rating",
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "image": {
+                  "description": "playlist art",
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          },
+          "get": {
+            "parameters": {}
+          },
+          "delete": {
+            "parameters": {}
+          }
+        }
+      }
+    },
+    "folders": {
+      "description": "Provides access to the media in folder layout, might contain contet of connected devices as well.",
+      "model": {
+        "name": "folderObject",
+        "resource": "medialibrary.folders",
+        "properties": {
+          "id": {
+            "description": "identifier",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "Folder name",
+            "type": "string"
+          },
+          "uri": {
+            "description": "object uri",
+            "type": "string",
+            "format": "uri"
+          },
+          "tracks": {
+            "description": "track files in folder",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.tracks.trackObject"
+                }
+              ]
+            }
+          },
+          "playlists": {
+            "description": "playlist files in folder",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.playlists.playlistObject"
+                }
+              ]
+            }
+          },
+          "videos": {
+            "description": "video files in folder",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.videos.videoObject"
+                }
+              ]
+            }
+          },
+          "pictures": {
+            "description": "pictures files in folder",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.pictures.pictureObject"
+                }
+              ]
+            }
+          },
+          "folders": {
+            "description": "folders in folder",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "#ref": "medialibrary.folders.folderObject"
+                }
+              ]
+            }
+          },
+          "abspath": {
+            "description": "absolute path to folder",
+            "type": "string"
+          },
+          "parent": {
+            "description": "parent folder",
+            "type": "object",
+            "oneOf": [
+              {
+                "#ref": "medialibrary.folders.folderObject"
+              }
+            ]
+          }
+        }
+      },
+      "endpoints": {
+        "resource": {
+          "get": {
+            "parameters": {}
+          }
+        },
+        "element": {
+          "get": {
+            "parameters": {}
+          }
+        }
+      },
+      "systemTriggeredEvents": [
+        "element",
+        "resource"
+      ]
+    }
+  }
+}
