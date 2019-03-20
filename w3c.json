@@ -1,6 +1,6 @@
 {
   "group":     61259
-, "contacts":  ["tguild"]
+, "contacts":  "tguild"
 , "policy":    "open"
 , "repo-type": "cg-report"
 }
