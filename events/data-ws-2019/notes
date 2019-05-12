@@ -1,0 +1,11 @@
+Like other design docs, your explainer should:
+
+Introduce the problem and explain the motivation for solving it
+State assumptions
+Provide evidence or argument that this problem is important to solve
+List goals
+List explicit non-goals
+Discuss key use-cases - it has to cover the motivating examples you’re considering in your design
+Propose a solution
+Provide example code that ties together problem, proposed solution and how it enables the listed use-cases
+Discuss alternative designs that were considered (or may be explored in future iterations) with pros/cons. You might want to include the rationale for any controversial decisions you made, for example in tradeoffs between functionality and security..
